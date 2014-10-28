@@ -1,7 +1,8 @@
 (ns gif-clj.core
   (:import AnimatedGifEncoder))
 
-(defn write-gif [filename imgs delay loops]
+(defn write-gif [filename imgs {:keys [delay loops]}
+                                :or {delay 1000 loops 0}]
   (let [encoder
 	(doto (AnimatedGifEncoder.)
 	  (.start filename)
