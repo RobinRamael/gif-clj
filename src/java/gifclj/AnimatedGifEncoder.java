@@ -1,3 +1,4 @@
+package gifclj;
 
 import java.io.*;
 import java.awt.*;
@@ -492,7 +493,6 @@ public class AnimatedGifEncoder {
     }
   }
 }
-
 /*
  * NeuQuant Neural-Net Quantization Algorithm
  * ------------------------------------------
@@ -997,6 +997,8 @@ class NeuQuant {
     return (bestbiaspos);
   }
 }
+
+
 
 // ==============================================================================
 // Adapted from Jef Poskanzer's Java port by way of J. M. G. Elliott.

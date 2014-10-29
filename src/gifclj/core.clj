@@ -1,11 +1,11 @@
-(ns gif-clj.core
-  (:import AnimatedGifEncoder))
+(ns gifclj.core
+  (:import gifclj.AnimatedGifEncoder))
 
-(defn write-gif 
+(defn write-gif
   "create an animated gif from a series of images.
-  (write-gif "output.gif" [image1 image2 image3])"
-  [filename imgs {:keys [delay loops]}
-                  :or {delay 1000 loops 0}]
+  (write-gif \"output.gif\" [image1 image2 image3])"
+  [filename imgs & {:keys [delay loops]
+                  :or {delay 1000 loops 0}}]
   (let [encoder
 	(doto (AnimatedGifEncoder.)
 	  (.start filename)
