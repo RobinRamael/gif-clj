@@ -1,27 +1,33 @@
 # gif-clj
 
-gif-clj is a small animated-gif encoder using [this](http://www.java2s.com/Code/Java/2D-Graphics-GUI/AnimatedGifEncoder.htm) java implementation.
+gif-clj is a small set of functions wrapping [this java encoder](http://www.java2s.com/Code/Java/2D-Graphics-GUI/AnimatedGifEncoder.htm).
 
-## Usage
+#### Usage
 
 ```clojure
-(write-gif "out.gif"        ;; output filename
-  (imgs-from-files <files>) ;; input files (imgs-from-files reads the images lazily)
-  100                       ;; delay in ms
-  0)                        ;; nr of loops (0 = never stop)
+; write-gif is a simple utility for creating a gif from a set of images
+; :delay sets the timing between images (ms)
+; :lastdelay sets the timing for the last image
+; :loops determines how many times the gif will loop. The default (0) is to loop forever
+
+(write-gif "out.gif"  [images] )
+(write-gif "out.gif"  [images] :delay 100 )
+(write-gif "out.gif"  [images] :delay 100 :lastdelay 2000)
+(write-gif "out.gif"  [images] :delay 100 :loops 1)
+
 ```
 
 write-gif returns false if an IOException occured (this is because of the java implementation).
 
 
-## Todo
+#### Todo
 
  * provide better exception (or any) handling
  * tests
  * reimplementing the java implementation.
 
 
-## License
+#### License
 
 Copyright (C) 2011 Robin Ramael
 
