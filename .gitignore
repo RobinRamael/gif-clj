@@ -6,3 +6,7 @@ pom.xml
 .lein-deps-sum
 *.gif
 *.png
+/.idea
+/.nrepl-port
+*.iml
+/target/
