@@ -1,3 +1,4 @@
+package gifclj;
 
 import java.io.*;
 import java.awt.*;
@@ -134,10 +135,11 @@ public class AnimatedGifEncoder {
    *          BufferedImage containing frame to write.
    * @return true if successful.
    */
-  public boolean addFrame(BufferedImage im) {
+  public boolean addFrame(BufferedImage im, int framedelay) {
     if ((im == null) || !started) {
       return false;
     }
+
     boolean ok = true;
     try {
       if (!sizeSet) {
@@ -155,7 +157,8 @@ public class AnimatedGifEncoder {
 	  writeNetscapeExt();
 	}
       }
-      writeGraphicCtrlExt(); // write graphic control extension
+      // delays for each frame are written here
+      writeGraphicCtrlExt(framedelay); // write graphic control extension
       writeImageDesc(); // image descriptor
       if (!firstFrame) {
 	writePalette(); // local color table
@@ -374,7 +377,7 @@ public class AnimatedGifEncoder {
   /**
    * Writes Graphic Control Extension
    */
-  protected void writeGraphicCtrlExt() throws IOException {
+  protected void writeGraphicCtrlExt( int framedelay ) throws IOException {
     out.write(0x21); // extension introducer
     out.write(0xf9); // GCE label
     out.write(4); // data block size
@@ -397,7 +400,9 @@ public class AnimatedGifEncoder {
 	0 | // 7 user input - 0 = none
 	transp); // 8 transparency flag
 
-    writeShort(delay); // delay x 1/100 sec
+
+    writeShort(framedelay);
+    //writeShort(delay); // delay x 1/100 sec
     out.write(transIndex); // transparent color index
     out.write(0); // block terminator
   }
@@ -492,7 +497,6 @@ public class AnimatedGifEncoder {
     }
   }
 }
-
 /*
  * NeuQuant Neural-Net Quantization Algorithm
  * ------------------------------------------
@@ -997,6 +1001,8 @@ class NeuQuant {
     return (bestbiaspos);
   }
 }
+
+
 
 // ==============================================================================
 // Adapted from Jef Poskanzer's Java port by way of J. M. G. Elliott.
