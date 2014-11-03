@@ -4,4 +4,5 @@
   :dev-dependencies [[swank-clojure "1.2.1"]]
   :java-source-paths ["src/java"]
   :license "Eclipse Public License"
-  :url "https://github.com/zachcp/gif-clj")
+  :signing {:gpg-key "robin.ramael@gmail.com"},
+  :url "https://github.com/RobinRamael/gif-clj")
